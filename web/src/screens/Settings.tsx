@@ -1,4 +1,4 @@
-import {CogIcon, DownloadIcon, KeyIcon} from '@heroicons/react/outline'
+import {BellIcon, CogIcon, DownloadIcon, KeyIcon} from '@heroicons/react/outline'
 import {NavLink, Route, Switch as RouteSwitch, useLocation, useRouteMatch} from "react-router-dom";
 import IndexerSettings from "./settings/Indexer";
 import IrcSettings from "./settings/Irc";
@@ -6,12 +6,14 @@ import ApplicationSettings from "./settings/Application";
 import DownloadClientSettings from "./settings/DownloadClient";
 import {classNames} from "../utils";
 import ActionSettings from "./settings/Action";
+import NotificationSettings from './settings/Notifications';
 
 const subNavigation = [
     {name: 'Application', href: '', icon: CogIcon, current: true},
     {name: 'Indexers', href: 'indexers', icon: KeyIcon, current: false},
     {name: 'IRC', href: 'irc', icon: KeyIcon, current: false},
     {name: 'Clients', href: 'clients', icon: DownloadIcon, current: false},
+    {name: 'Notifications', href: 'notifications', icon: BellIcon, current: false},
     // {name: 'Actions', href: 'actions', icon: PlayIcon, current: false},
     // {name: 'Rules', href: 'rules', icon: ClipboardCheckIcon, current: false},
     // {name: 'Notifications', href: 'notifications', icon: BellIcon, current: false},
@@ -99,6 +101,10 @@ export default function Settings() {
 
                             <Route path={`${url}/actions`}>
                                 <ActionSettings/>
+                            </Route>
+
+                            <Route path={`${url}/notifications`}>
+                                <NotificationSettings />
                             </Route>
 
                         </RouteSwitch>

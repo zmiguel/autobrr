@@ -110,6 +110,9 @@ const APIClient = {
     events: {
         logs: () => new EventSource(`${sseBaseUrl()}api/events?stream=logs`, { withCredentials: true })
     },
+    notifications: {
+        getAll: () => appClient.Get("api/notification"),
+    },
     release: {
         find: (query?: string) => appClient.Get(`api/release${query}`),
         stats: () => appClient.Get(`api/release/stats`)

@@ -222,3 +222,10 @@ export interface ReleaseStats {
     push_approved_count: number;
     push_rejected_count: number;
 }
+
+export interface Notification {
+    id: number;
+    name: string;
+    enabled: boolean;
+    type: string;
+}
