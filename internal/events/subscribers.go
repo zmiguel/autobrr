@@ -2,8 +2,8 @@ package events
 
 import (
 	"context"
-
 	"github.com/autobrr/autobrr/internal/domain"
+	"github.com/autobrr/autobrr/internal/notification"
 	"github.com/autobrr/autobrr/internal/release"
 
 	"github.com/asaskevich/EventBus"
@@ -11,12 +11,17 @@ import (
 )
 
 type Subscriber struct {
-	eventbus   EventBus.Bus
-	releaseSvc release.Service
+	eventbus        EventBus.Bus
+	notificationSvc notification.Service
+	releaseSvc      release.Service
 }
 
-func NewSubscribers(eventbus EventBus.Bus, releaseSvc release.Service) Subscriber {
-	s := Subscriber{eventbus: eventbus, releaseSvc: releaseSvc}
+func NewSubscribers(eventbus EventBus.Bus, notificationSvc notification.Service, releaseSvc release.Service) Subscriber {
+	s := Subscriber{
+		eventbus:        eventbus,
+		notificationSvc: notificationSvc,
+		releaseSvc:      releaseSvc,
+	}
 
 	s.Register()
 
@@ -34,4 +39,6 @@ func (s Subscriber) releaseActionStatus(actionStatus *domain.ReleaseActionStatus
 	if err != nil {
 		log.Error().Err(err).Msgf("events: 'release:store-action-status' error")
 	}
+
+	// run notifications
 }

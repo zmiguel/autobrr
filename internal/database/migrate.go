@@ -214,6 +214,29 @@ CREATE TABLE release_action_status
 		release_id    INTEGER NOT NULL,
 		FOREIGN KEY (release_id) REFERENCES "release"(id)
 );
+
+CREATE TABLE notification
+(
+    id         INTEGER PRIMARY KEY,
+    name       TEXT,
+    type       TEXT,
+    enabled    BOOLEAN,
+    events     TEXT []   DEFAULT '{}' NOT NULL,
+    token      TEXT,
+    api_key    TEXT,
+    webhook    TEXT,
+    title      TEXT,
+    icon       TEXT,
+    host       TEXT,
+    username   TEXT,
+    password   TEXT,
+    channel    TEXT,
+    rooms      TEXT,
+    targets    TEXT,
+    devices    TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 `
 
 var migrations = []string{
@@ -332,6 +355,30 @@ var migrations = []string{
 
 	ALTER TABLE "filter"
 		ADD COLUMN perfect_flac BOOLEAN;
+	`,
+	`
+	CREATE TABLE notification
+	(
+		id         INTEGER PRIMARY KEY,
+		name       TEXT,
+		type       TEXT,
+		enabled    BOOLEAN,
+		events     TEXT []   DEFAULT '{}' NOT NULL,
+		token      TEXT,
+		api_key    TEXT,
+		webhook    TEXT,
+		title      TEXT,
+		icon       TEXT,
+		host       TEXT,
+		username   TEXT,
+		password   TEXT,
+		channel    TEXT,
+		rooms      TEXT,
+		targets    TEXT,
+		devices    TEXT,
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+		updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);
 	`,
 }
 
